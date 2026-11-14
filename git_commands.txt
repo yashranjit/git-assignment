@@ -1,0 +1,63 @@
+Step 1: Local repository setup
+I created a project folder called git-assignment that holds index.html and about.html,
+then ran git init -b main inside it.
+
+mkdir git-assignment 
+cd git-assignment
+// created index.html and about.html
+git init -b main
+git status
+
+Step 2: Git workflow execution 
+
+1. Initial commit: git add . then git commit -m "Initial commit: add index.html and
+about.html"
+
+2. Second commit: I edited index.html to add welcome section then ran 
+git add index.html and git commit -m "Update index.html with welcome section"
+
+3. Create branch: git branch feature 
+
+4. Switch to feature: git switch feature 
+
+5. Commit on feature: I edited about.html to add a team section then ran 
+git add about.html and git commit -m "Add team section to about page"
+
+6. Switch back: git switch main
+
+7. Merge: git merge --no-ff feature -m "Merge branch 'feature' into main".
+I used --no-ff so that git records a separate merge commit and the branch shows up in the 
+history graph.
+
+8. History: git --oneline --graph --all
+
+Step 3: .gitignore implementation 
+The .gitignore file contains: 
+// all the log files and temp folder
+*.log
+temp/
+
+To check that it works, I created debug.log and temp/scratch.txt .git status then listed 
+only .gitignore as untracked, so both files were being ignored. I committed it with
+git commit -m "Add .gitignore for log files and temp folder"
+
+Step 4: Undo operation 
+
+I made one more commit that adds contact.html, then undid it with git revert HEAD --no-edit
+
+I chose git revert rather than git reset because, revert undoes a commit by adding a new
+commit that cancels it, so it never rewrites history. 
+That means GitHub history still shows both the commit and its undo. 
+
+After revert, contact.html is gone from the working folder and git log --oneline show the 
+"Revert" commit on top of the "Add contact page" commit. 
+
+Step 5: Github integration 
+
+I created a public empty repo named git-assignment on Github, without a README. The I connected
+my local repository and pushed it. 
+
+git remote add origin https://github.com/yashranjit/git-assignment.git
+git remote -v 
+git push -u origin main 
+git push origin feature 
